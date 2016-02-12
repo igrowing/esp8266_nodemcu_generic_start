@@ -14,8 +14,8 @@ Sensors are esp8266 modules that mainly deeply sleep :) On periodic basis they a
 Actuators are esp8266 modules that mainly online 24/7. They should be always ready to recive a command from the network and do the action. Actuators are minded to fastest performance.
 
 **Subclasses:**
-- Sensors may have a subclass of "greedy" sensors. The "greediness" is defined by higher power consumption. The nature of greedy sensor comes from necessity to report quicly on upcoming changes. Example: human presense sensor, security sensor, etc. This subclass must have better power supply/management than resular sensor.
-- Actuators may have a subclass of "lean" actuators. The "leaniness" comes from lower power consumption, resulted with postponed response/action. Example: garden watering actuator. This subclass is not always on and poered in similar to regular sensor way (from ambient).
+- Sensors may have a subclass of "greedy" sensors. The "greediness" is defined by higher power consumption. The nature of greedy sensor comes from necessity to report quickly on upcoming changes. Example: human presense sensor, security sensor, etc. This subclass must have better power supply/management than resular sensor.
+- Actuators may have a subclass of "lean" actuators. The "leaniness" comes from lower power consumption, resulted with postponed response/action. Example: garden watering actuator. This subclass is not always on and poered in similar to regular sensor way (from ambient). Some actuators may have a sensor function. Example: power switch can sense the current/voltage/power consumption.
 
 <hr>
 
