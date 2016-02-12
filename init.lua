@@ -1,6 +1,15 @@
+-- OPTIONAL SETTINGS
+-- I2C IO indexes (not GPIO numbers! Look up into GPIO map!)
+SDA = 4 -- sda pin, GPIO2
+SCL = 5 -- scl pin, GPIO14
+
+-- LED + Button multiplexer GPIO
+LBGI=6  -- GPIO 12
+
 function run_setup()
     wifi.setmode(wifi.SOFTAP)
     cfg={}
+	-- Set your own AP prefix. SHM = Smart Home Module.
     cfg.ssid="SHM"..node.chipid()
     wifi.ap.config(cfg)
 
@@ -10,9 +19,6 @@ function run_setup()
 end
 
 function read_wifi_credentials()
-    -- TODO: Add here check of pressed button for 3 sec.
-    -- If button pressed then remove netconfig file
-    
     if file.open("netconfig.lc", "r") then
         dofile('netconfig.lc')
         file.close()
@@ -60,7 +66,7 @@ end
 -------------------------
 ------  MAIN  -----------
 -------------------------
-dofile("button_setup.lc")  -- uses timer 5
+dofile("button_setup.lc")  -- uses timer #5
 wifi.sta.disconnect()
 wifi_ssid, wifi_password, wifi_ip, wifi_nm, wifi_gw, wifi_desc = read_wifi_credentials()
 -- TODO: Add your functionality here to do BEFORE connection established.
