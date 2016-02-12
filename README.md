@@ -1,10 +1,11 @@
 # esp8266_nodemcu_generic_start
 All required files to start develop other functional modules.
 
-The idea:
+**The idea:**
 - This repository includes basic files fo all types of esp8266 modules with no regard to the module function.
 - The functional deifferences are posted in parallel repos, one repo per esp8266 module functionality.
 - All esp8266 modules are classified to 2 classes:
+
 1. Sensors
 2. Actuators
 
@@ -12,19 +13,19 @@ Sensors are esp8266 modules that mainly deeply sleep :) On periodic basis they a
 
 Actuators are esp8266 modules that mainly online 24/7. They should be always ready to recive a command from the network and do the action. Actuators are minded to fastest performance.
 
-Subclasses:
+**Subclasses:**
 - Sensors may have a subclass of "greedy" sensors. The "greediness" is defined by higher power consumption. The nature of greedy sensor comes from necessity to report quicly on upcoming changes. Example: human presense sensor, security sensor, etc. This subclass must have better power supply/management than resular sensor.
 - Actuators may have a subclass of "lean" actuators. The "leaniness" comes from lower power consumption, resulted with postponed response/action. Example: garden watering actuator. This subclass is not always on and poered in similar to regular sensor way (from ambient).
 
 <hr>
 
-Implemented:
+**Implemented:**
 - Captive screen: the esp8266 dicovers that the module is new (no kept settings) and switches to AP mode. User can dial in from any browser and set the unit properties. Then the unit reboots and connects to your network.
 - Settings reset by button: 5 seconds button hold when the unit is powering up (or awaken) will clean all kep settings.
 
-TODO:
+**TODO:**
 - Unify all typical general settings (even optional) in init.lua.
 - Add OTA support. Adopt from: <a href="http://www.instructables.com/id/ESP8266-WiFi-File-Management/?ALLSTEPS">here</a>, repo: <a href="https://github.com/breagan/ESP8266_WiFi_File_Manager">here</a>
 
-Public questions:
+**Public questions:**
 - Looking for simpler way to upload files esp8266.
