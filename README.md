@@ -28,4 +28,6 @@ Actuators are esp8266 modules that mainly are online 24/7. They should be always
 - Add OTA support. Adopt from: <a href="http://www.instructables.com/id/ESP8266-WiFi-File-Management/?ALLSTEPS">here</a>, repo: <a href="https://github.com/breagan/ESP8266_WiFi_File_Manager">here</a>
 
 **Public questions:**
-- Looking for simpler way to upload files esp8266.
+- Looking for simpler way to upload files to esp8266.
+- Is it possible usnig MQTT to transmit data in backward direction: from cloud/broker to the remote sensor? If yes, how?
+- How to implement a mirror of IFTTT (or similar functionality) for the case of abrupted Internet connection?
