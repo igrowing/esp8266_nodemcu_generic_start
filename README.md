@@ -11,7 +11,7 @@ All required files to start develop other functional modules.
 
 Sensors are esp8266 modules that mainly deeply sleep :) On periodic basis they are awaken, perform required measurements and send update to the network. Sensors are built by HW and written by SW with the main concern of extremely low power consumption. The power should be taken from the ambient.
 
-Actuators are esp8266 modules that mainly online 24/7. They should be always ready to recive a command from the network and do the action. Actuators are minded to fastest performance.
+Actuators are esp8266 modules that mainly are online 24/7. They should be always ready to recive a command from the network and do the action. Actuators are minded to fastest performance.
 
 **Subclasses:**
 - Sensors may have a subclass of "greedy" sensors. The "greediness" is defined by higher power consumption. The nature of greedy sensor comes from necessity to report quickly on upcoming changes. Example: human presense sensor, security sensor, etc. This subclass must have better power supply/management than resular sensor.
