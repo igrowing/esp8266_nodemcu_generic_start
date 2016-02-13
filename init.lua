@@ -49,16 +49,19 @@ function try_connecting(wifi_ssid, wifi_password, wifi_ip, wifi_nm, wifi_gw)
           tmr.stop(0)
           print("Connected as: " .. wifi.sta.getip())
           collectgarbage()
+		  tmr.unregister(0)
           -- TODO: Add your functionality here to do AFTER connection established.
-          --
+		  --
+		  tmr.unregister(1)
         end
     end)
 
-    tmr.alarm(1, 8000, 0, function()
+    tmr.alarm(1, 10000, 0, function()
         if wifi.sta.status() ~= 5 then
             tmr.stop(0)
             print("Failed to connect to \"" .. wifi_ssid .. "\"")
             run_setup()
+		    tmr.unregister(0)
         end
     end)
 end
@@ -79,6 +82,8 @@ if wifi_ssid ~= nil and wifi_password ~= nil then
     print("wifi_ip : " .. wifi_ip)
     print("wifi_nm : " .. wifi_nm)
     print("wifi_gw : " .. wifi_gw)
+    print("wifi_dns : " .. wifi_dns)
+    print("wifi_repo : " .. wifi_repo)
     print("wifi_desc : " .. wifi_desc)
     try_connecting(wifi_ssid, wifi_password, wifi_ip, wifi_nm, wifi_gw)
 else
