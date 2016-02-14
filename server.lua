@@ -5,6 +5,16 @@
 --XChip's NodeMCU IDE
 ----
 
+--  Run timer for timeout in case no one was connected
+function run_timeout()
+	tmr.deregister(0)
+	tmr.alarm(0, 15 * 60 * 1000, 0, function()
+		node.restart()
+	end)
+end
+run_timeout()
+
+--  Run the server
 srv=net.createServer(net.TCP) 
 srv:listen(80, function(conn) 
 
@@ -54,6 +64,9 @@ srv:listen(80, function(conn)
   end)
   
   conn:on("sent",function(conn) 
+    -- Restart the timout timer, let user to enter the data.
+	run_timeout()
+	
     if responseBytes>=0 and method=="GET" then
         if file.open(url, "r") then            
             file.seek("set", responseBytes)
