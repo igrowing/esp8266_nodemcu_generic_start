@@ -25,7 +25,7 @@ function read_wifi_credentials()
     end
 
 	-- set DNS to second slot if configured.
-	if wifi_dns ~= nil or wifi_dns ~= '' then net.dns.setdnsserver(wifi_dns, 1) end
+	if wifi_dns ~= nil and wifi_dns ~= '' then net.dns.setdnsserver(wifi_dns, 1) end
 	
     if wifi_ssid ~= nil and wifi_ssid ~= "" and wifi_password ~= nil then
         return wifi_ssid, wifi_password, wifi_ip, wifi_nm, wifi_gw, wifi_desc
