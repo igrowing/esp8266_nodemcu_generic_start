@@ -1,0 +1,2 @@
+uclass="generic"
+utype="generic"

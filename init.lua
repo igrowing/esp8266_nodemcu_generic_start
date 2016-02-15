@@ -69,6 +69,9 @@ end
 -------------------------
 ------  MAIN  -----------
 -------------------------
+if file.open("ut.lc", "r") then dofile("ut.lc")
+else print "Unit type is not set." end
+
 dofile("button_setup.lc")  -- uses timer #5
 wifi.sta.disconnect()
 wifi_ssid, wifi_password, wifi_ip, wifi_nm, wifi_gw, wifi_desc = read_wifi_credentials()
@@ -82,9 +85,9 @@ if wifi_ssid ~= nil and wifi_password ~= nil then
     print("wifi_ip : " .. wifi_ip)
     print("wifi_nm : " .. wifi_nm)
     print("wifi_gw : " .. wifi_gw)
-    print("wifi_dns : " .. wifi_dns)
-    print("wifi_repo : " .. wifi_repo)
-    print("wifi_desc : " .. wifi_desc)
+    print("wifi_dns : " .. (wifi_dns or ""))
+    print("wifi_repo : " .. (wifi_repo or ""))
+    print("wifi_desc : " .. (wifi_desc or ""))
     try_connecting(wifi_ssid, wifi_password, wifi_ip, wifi_nm, wifi_gw)
 else
     run_setup()

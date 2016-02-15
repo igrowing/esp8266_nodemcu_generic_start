@@ -7,10 +7,8 @@
 
 --  Run timer for timeout in case no one was connected
 function run_timeout()
-	tmr.deregister(0)
-	tmr.alarm(0, 15 * 60 * 1000, 0, function()
-		node.restart()
-	end)
+    tmr.unregister(0)
+	tmr.alarm(0, 15 * 60 * 1000, 0, function() node.restart() end)
 end
 run_timeout()
 
@@ -29,6 +27,10 @@ srv:listen(80, function(conn)
   
     if Status==0 then
         _, _, method, url, vars = string.find(payload, "([A-Z]+) /([^?]*)%??(.*) HTTP")
+		if method == nil then
+            print("Received garbage via HTTP.")
+            return
+        end
 		-- Get the vars from POST: data is not passed in address.
 		if string.lower(method) == "post" then
 		    _, _, vars = string.find(payload, "(wifi_ssid.*)")
@@ -66,13 +68,19 @@ srv:listen(80, function(conn)
   conn:on("sent",function(conn) 
     -- Restart the timout timer, let user to enter the data.
 	run_timeout()
-	
+    -- Pad the unit identifier with spaces to fixed length.
+    holder = "generic_and_very_long_place_holder_keep_even_more"
+	ident = (uclass or "not_set").."-"..(utype or "not_set").."-"..node.chipid()..string.rep(" ", 50)
+    ident=(string.sub(ident, 1, string.len(holder)))
+
     if responseBytes>=0 and method=="GET" then
         if file.open(url, "r") then            
             file.seek("set", responseBytes)
             local line=file.read(512)
             file.close()
             if line then
+				-- Update the data to send with unit identifier
+				line=(string.gsub(line, holder, ident))
                 conn:send(line)
                 responseBytes = responseBytes + 512    
 
@@ -82,7 +90,8 @@ srv:listen(80, function(conn)
             end
         end        
     end
-
+    ident, holder = nil, nil -- clean memory
+    
     conn:close() 
   end)
 end)
