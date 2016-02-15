@@ -1,0 +1,2 @@
+uclass="sensor"
+utype="weather"
