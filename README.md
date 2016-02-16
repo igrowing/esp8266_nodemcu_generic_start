@@ -1,6 +1,9 @@
 # esp8266_nodemcu_generic_start
 All required files to start develop other functional modules.
 
+## [Getting started with iSmart](https://github.com/igrowing/esp8266_nodemcu_generic_start/wiki/Getting-started-with-iSmart "Easy ramp up")
+
+
 **The idea:**
 - This repository includes basic files fo all types of esp8266 modules with no regard to the module function.
 - The functional deifferences are posted in parallel repos, one repo per esp8266 module functionality.
