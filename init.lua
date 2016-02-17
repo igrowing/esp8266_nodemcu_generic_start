@@ -41,7 +41,7 @@ function try_connecting(wifi_ssid, wifi_password, wifi_ip, wifi_nm, wifi_gw)
     -- Set IP if no DHCP required
     if wifi_ip ~= "" then wifi.sta.setip({ip=wifi_ip, netmask=wifi_nm, gateway=wifi_gw}) end
 
-    tmr.alarm(0, 1000, 1, function()
+    tmr.alarm(0, 2000, 1, function()
         if wifi.sta.status() ~= 5 then
           print("Connecting to AP...")
         else
@@ -56,12 +56,15 @@ function try_connecting(wifi_ssid, wifi_password, wifi_ip, wifi_nm, wifi_gw)
         end
     end)
 
-    tmr.alarm(1, 10000, 0, function()
+    tmr.alarm(1, 20000, 0, function()
         if wifi.sta.status() ~= 5 then
             tmr.stop(0)
-            print("Failed to connect to \"" .. wifi_ssid .. "\"")
-            run_setup()
-		    tmr.unregister(0)
+            tmr.unregister(0)
+            print("Failed to connect to \"" .. wifi_ssid .. "\". Sleep + retry...")
+            print("Press the button 5 seconds on the next boot to enter WiFi configuration captive mode.")
+            --run_setup()
+            -- No sense to run setup if the settings present. Sleep and retry.
+            node.dsleep(5 * 60 * 1000 * 1000, 0)   -- 5 min sleep		    
         end
     end)
 end
