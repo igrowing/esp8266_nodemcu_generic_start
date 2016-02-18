@@ -57,14 +57,20 @@ function try_connecting(wifi_ssid, wifi_password, wifi_ip, wifi_nm, wifi_gw)
     end)
 
     tmr.alarm(1, 20000, 0, function()
+        -- Sleep if sensor (save power until WiFi gets back), 
+        -- else run configuration mode
         if wifi.sta.status() ~= 5 then
             tmr.stop(0)
             tmr.unregister(0)
-            print("Failed to connect to \"" .. wifi_ssid .. "\". Sleep + retry...")
-            print("Press the button 5 seconds on the next boot to enter WiFi configuration captive mode.")
-            --run_setup()
-            -- No sense to run setup if the settings present. Sleep and retry.
-            node.dsleep(5 * 60 * 1000 * 1000, 0)   -- 5 min sleep		    
+            print("Failed to connect to \"" .. wifi_ssid .. "\".")
+            if uclass == nil or uclass == "sensor" then 
+                print("Sleep 5 min + retry...")
+                print("Press the button 5 seconds on the next boot to enter WiFi configuration captive mode.")
+                -- No sense to run setup if the settings present. Sleep and retry.
+                node.dsleep(5 * 60 * 1000 * 1000, 0)   -- 5 min sleep            
+            else
+                run_setup()
+            end
         end
     end)
 end
