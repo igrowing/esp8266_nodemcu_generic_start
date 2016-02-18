@@ -27,9 +27,7 @@ _Actuators_ are esp8266 modules that mainly are online 24/7. They should be alwa
 - Settings reset by button: 5 seconds button hold when the unit is powering up (or awaken) will clean all kep settings.
 - Timeout to restart the ESP8266 in case of no attempts to activate the node.
 
-**TODO:**
-- Unify all typical general settings (even optional) in init.lua.
-- Add OTA support. Adopt from: <a href="http://www.instructables.com/id/ESP8266-WiFi-File-Management/?ALLSTEPS">here</a>, repo: <a href="https://github.com/breagan/ESP8266_WiFi_File_Manager">here</a> UPD: _It works but it's for geeks. This is not the method for automatic code deployment. Need to write form scratch._
+<hr>
 
 **Public questions:**
 - Looking for simpler way to upload files to esp8266.
