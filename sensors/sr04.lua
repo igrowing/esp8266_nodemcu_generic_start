@@ -18,26 +18,32 @@
 --      package.loaded["sr04"] = nil
 --
 -- Author: iGrowing
+-- License: MIT
 --
 
 local moduleName = ...
 local M = {}
 _G[moduleName] = M 
         
+local TID = 0
+local SAMPLE_INTERVAL = 150
+local TRIG_PIN = 1  -- gpio 5
+local ECHO_PIN = 2  -- gpio 4
+local _start = 0
+local _end = 0
+
 function M.init(timer_id, sample_interval, trig_pin, echo_pin)
 -- Set longer sample_interval (1000 or more) for continuous polling --
     -- Initialize
-    local TID = timer_id or 0
-    local SAMPLE_INTERVAL = sample_interval or 150
-    local TRIG_PIN = trig_pin or 1  -- gpio 5
-    local ECHO_PIN = echo_pin or 2  -- gpio 4
-    
+    TID = timer_id or TID
+    SAMPLE_INTERVAL = sample_interval or SAMPLE_INTERVAL
+    TRIG_PIN = trig_pin or TRIG_PIN  -- gpio 5
+    ECHO_PIN = echo_pin or ECHO_PIN  -- gpio 4
+
     gpio.mode(TRIG_PIN, gpio.OUTPUT)
     gpio.mode(ECHO_PIN, gpio.INT)
     gpio.write(TRIG_PIN, gpio.LOW)
     
-    local _start = 0
-    local _end = 0
     function _trig_cb(level)  -- Internal function
         -- Register in variables the echo start/stop timestamps
         if level == gpio.HIGH then 
